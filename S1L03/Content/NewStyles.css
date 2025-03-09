@@ -1,0 +1,98 @@
+﻿body {
+    background-color: dimgray;
+    
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap; /* Ensures items wrap when the screen is resized */
+    border: 2px solid white; /* Outer border around the nav */
+}
+
+    nav ul li {
+        margin: 0;
+        display: inline-block; /* Ensures list items are inline */
+        border-right: 2px solid white; /* Creates dividers between menu items */
+    }
+
+        /* Remove right border for the last item */
+        nav ul li:last-child {
+            border-right: none;
+        }
+
+        /* Style for links */
+        nav ul li a {
+            text-decoration: none;
+            background-color: black; /* Default background */
+            color: white;
+            padding: 12px 20px;
+            display: inline-block;
+        }
+
+            /* Hover effect */
+            nav ul li a:hover {
+                background-color: grey;
+            }
+
+            /* Active link - current page */
+            nav ul li a.active {
+                background-color: blue; /* Green background for active link */
+            }
+
+
+section {
+    border: 2px solid Blue;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: lightcyan;
+    display: flex;
+    align-items: center;
+}
+
+/* Biography Section */
+.bio img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+    transition: transform 0.5s;
+}
+
+/* Hobbies Section */
+.hobbies {
+    flex-direction: row-reverse;
+}
+
+    .hobbies img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-left: 20px;
+        transition: transform 0.5s;
+    }
+
+/* Flip Image on Hover */
+img:hover {
+    transform: scaleX(-1);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 2px solid blue;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}

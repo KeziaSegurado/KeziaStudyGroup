@@ -20,5 +20,10 @@ namespace S1L03.Models
 
         [Display(Name = "Email Address")] //Add as decorator
         public string email { get; set; }
+
+
+        [Display(Name = "Link to personal page")] //Add as decorator
+        public string myLink { get; set; }
+
     }
 }

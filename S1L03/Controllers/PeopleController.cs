@@ -11,11 +11,11 @@ namespace S1L03.Controllers
         {
             List<Models.PersonModel> people = new List<Models.PersonModel>();
 
-            people.Add(new Models.PersonModel { studentNumber = "u01234567", FirstName = "Jane", LastName = "Doe", email = "jane.doe@tuks.co.za" });
-            people.Add(new Models.PersonModel { studentNumber = "u12345678", FirstName = "John", LastName = "Doe", email = "john.doe@tuks.co.za " });
-            people.Add(new Models.PersonModel { studentNumber = "u24697531", FirstName = "Sara", LastName = "Smith", email = "Sara.Smith.@tuks.co.za" });
-            people.Add(new Models.PersonModel { studentNumber = "u45976213", FirstName = "Bianca", LastName = "Du Tiot", email = "Bianca.Dutoit@tuks.co.za" });
-            people.Add(new Models.PersonModel { studentNumber = "u79435884", FirstName = "Rachel", LastName = "Van Der Merve", email = "Rachel.Vandermerve@tuks.co.za" });
+            people.Add(new Models.PersonModel { studentNumber = "u24622436", FirstName = "Kezia", LastName = "Segurado", email = "kezia.segurado@tuks.co.za", myLink = "~/HTML/Kezia.html"});
+            people.Add(new Models.PersonModel { studentNumber = "u12345678", FirstName = "John", LastName = "Doe", email = "john.doe@tuks.co.za " , myLink = "~/HTML/John.html" });
+            people.Add(new Models.PersonModel { studentNumber = "u24697531", FirstName = "Sara", LastName = "Smith", email = "sara.smith.@tuks.co.za", myLink = "~/HTML/Sara.html" });
+            people.Add(new Models.PersonModel { studentNumber = "u45976213", FirstName = "Bianca", LastName = "Du Tiot", email = "bianca.dutoit@tuks.co.za", myLink = "~/HTML/Bianca.html" });
+            people.Add(new Models.PersonModel { studentNumber = "u79435884", FirstName = "Rachel", LastName = "Van Der Merve", email = "rachel.vandermerve@tuks.co.za", myLink = "~/HTML/Rachel.html" });
 
             return View(people);
 
