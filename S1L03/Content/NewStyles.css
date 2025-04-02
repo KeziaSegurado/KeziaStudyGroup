@@ -1,7 +1,100 @@
 ﻿body {
     background-color: dimgray;
-    
 }
+
+/* Bootstrap Navbar Overrides */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8); /* Adjust link color */
+}
+
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-nav .nav-link:focus {
+        color: rgba(255, 255, 255, 1); /* Adjust hover/focus color */
+        background-color: grey; /* Hover background */
+    }
+
+    .navbar-dark .navbar-nav .nav-link.active {
+        color: white;
+        background-color: blue; /* Active link background */
+    }
+
+/* Bootstrap Panel Overrides */
+.panel {
+    border: 2px solid blue; /* Panel border */
+    margin-bottom: 20px;
+    background-color: lightcyan; /* Panel background */
+}
+
+.panel-heading {
+    background-color: #007bff; /* Panel heading background */
+    color: white;
+    padding: 10px 15px;
+    border-bottom: 2px solid blue;
+}
+
+.panel-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+    /* Image Styles */
+    .panel-body img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+        .panel-body img:hover {
+            transform: scaleX(-1);
+        }
+
+    .panel-body .left-img {
+        margin-right: 20px;
+    }
+
+    .panel-body .right-img {
+        margin-left: 20px;
+        flex-direction: row-reverse;
+    }
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th,
+    .table td {
+        border: 2px solid blue;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+    }
+
+/* Section Box Styles (for the first html file)*/
+.section-box {
+    border: 2px solid Blue;
+    background-color: lightcyan;
+}
+
+    .section-box h2 {
+        color: black;
+    }
+
+/* General Container Styling */
+.container {
+    max-width: 1200px; /* or whatever width you prefer */
+    margin: auto;
+}
+
+
+
 nav ul {
     list-style-type: none;
     padding: 0;

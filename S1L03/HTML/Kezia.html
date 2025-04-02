@@ -1,65 +1,86 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Person 01</title>
-    <link rel="stylesheet" href="/Content\NewStyles.css">
+    <title>Person 01 - Kezia Segurado</title>
+
+    <!-- Bootstrap & jQuery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/Content/NewStyles.css">
 </head>
 <body>
-    <h1>Person 01 - Kezia Segurado</h1>
-    <nav>
-        <ul>
-            <li><a href="/Home/">MAIN</a></li>
-            <li><a href="/People/ListPeople">LIST</a></li>
-            <li><a href="Kezia.html" class="active">Person 01</a></li>
-            <li><a href="John.html">Person 02</a></li>
-            <li><a href="Sara.html">Person 03</a></li>
-            <li><a href="Bianca.html">Person 04</a></li>
-            <li><a href="Rachel.html">Person 05</a></li>
-            <li><a href="javascript:history.back()">BACK</a></li>
-        </ul>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Home/">MAIN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/People/ListPeople">LIST</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="Kezia.html">Person 01</a></li>
+                    <li class="nav-item"><a class="nav-link" href="John.html">Person 02</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Sara.html">Person 03</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Bianca.html">Person 04</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Rachel.html">Person 05</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:history.back()">BACK</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    <section class="bio">
-        <h2>Biography and Background</h2>
-        <img src="Images/Kezia.jpeg" alt="Kezia Segurado" class="left-img">
-        <p>
-            Kezia Segurado was born in Joburg and has always been passionate about ballet.
-            She is currently pursuing a degree in IT and is known for her dedication
-            to academic excellence and leadership.
-        </p>
-    </section>
 
-    <section class="hobbies">
-        <h2>Hobbies</h2>
-        <p>
-            Kezia enjoys a variety of hobbies, including painting, hiking, and playing the piano.
-            She spends her weekends exploring nature trails and capturing beautiful landscapes
-            through her artwork.
-        </p>
-        <img src="Images/Painting.jpg" alt="Hobbies Image" class="right-img">
-    </section>
+    <!-- Page Content -->
+    <div class="container mt-4">
+        <h1 class="text-left">Person 01 - Kezia Segurado</h1>
 
- <section class="modules">
-     <h2>Registered Modules</h2>
-     <table>
-         <tr>
-             
-             <th>Modules Semester 1</th>
-             <th>Modules Semester 2</th>
-         </tr>
-         <tr>
-             <td>INF 220</td>
-             <td>INF 272</td>
-         </tr>
-         <tr>  
-             <td>MAT 250</td>
-             <td>INF 271</td>
-         </tr>
-         <tr>
-             <td>INF 264</td>
-             <td>INL 210</td>
-         </tr>
-     </table>
-</section>
+        <div class="row">
+            <!-- Biography -->
+            <div class="col-md-4 p-3 section-box " >
+                <h2>Biography and Background</h2>
+                <img src="Images/Kezia.jpeg" alt="Kezia Segurado" class="img-fluid rounded">
+                <p>
+                    Kezia Segurado was born in Joburg and has always been passionate about ballet.
+                    She is currently pursuing a degree in IT and is known for her dedication to academic
+                    excellence and leadership.
+                </p>
+            </div>
+
+            <!-- Hobbies -->
+            <div class="col-md-4 p-3 section-box ">
+                <h2>Hobbies</h2>
+                <p>
+                    Kezia enjoys a variety of hobbies, including painting, hiking, and playing the piano.
+                    She spends her weekends exploring nature trails and capturing beautiful landscapes
+                    through her artwork.
+                </p>
+                <img src="Images/Painting.jpg" alt="Hobbies Image" class="img-fluid rounded">
+            </div>
+
+            <!-- Modules -->
+            <div class="col-md-4 p-3 section-box ">
+                <h2>Registered Modules</h2>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Modules Semester 1</th>
+                            <th>Modules Semester 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>INF 220</td><td>INF 272</td></tr>
+                        <tr><td>MAT 250</td><td>INF 271</td></tr>
+                        <tr><td>INF 264</td><td>INL 210</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

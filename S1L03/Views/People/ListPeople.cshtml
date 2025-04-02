@@ -28,7 +28,9 @@
         <th>
             @Html.DisplayNameFor(model => model.myLink)
         </th>
-        <th></th>
+        <th>
+            Delete
+        </th>
     </tr>
 
     @foreach (var item in Model) //For each person
@@ -37,7 +39,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.studentNumber)
             </td>
-            <td>
+            <td class="first-name">
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
@@ -49,6 +51,9 @@
             <td>
                 <a href="@Url.Content(item.myLink)" class="btn btn-primary" target="_blank">LINK</a>
             </td>
+            <td>
+                <button class="btn btn-primary remove-btn">Delete</button>
+            </td>
             @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
@@ -58,5 +63,41 @@
     }
 
 </table>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to remove a row when "Delete" button is clicked
+            let removeButtons = document.querySelectorAll(".remove-btn");
+
+            removeButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    let row = this.closest("tr"); // Find the closest table row
+                    row.remove();
+                });
+            });
+
+            let rows = document.querySelectorAll("table tr");
+
+            rows.forEach(row => {
+                let firstNameCell = row.querySelector(".first-name"); // Get the first name cell
+
+                if (firstNameCell) {
+                    let name = firstNameCell.textContent.trim();
+                    console.log("Checking name:", name);
+
+                    if (name.startsWith("S")) {
+                        row.querySelectorAll("td").forEach(cell => {
+                            if (!cell.querySelector("button")) { // Exclude buttons
+                                cell.style.color = "red";
+                            }
+                        });
+                        console.log("Row text changed to red for:", name);
+                    }
+                }
+            });
+        });
+    </script>
+}
 
 
