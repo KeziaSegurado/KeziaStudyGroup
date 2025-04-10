@@ -1,6 +1,4 @@
-﻿@* Interface Enumarable = Enumarate or list (to ascertain the number of : count) *@
-
-@model IEnumerable<S1L03.Models.PersonModel>
+﻿@model IEnumerable<S1L03.Models.PersonModel>
 
 @{
     ViewBag.Title = "List of People";
@@ -8,96 +6,188 @@
 
 <h2>List of People</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create") >> In this overload it is the name and the action >> Link going nowhere.
-    </p>*@
+<p>
+    @Html.ActionLink("Create New", "PeopleList")
+</p>
+
+<div style="display: flex; align-items: center; margin-bottom: 10px;">
+    <label for="SearchString" style="margin-right: 10px;">Search String:</label>
+    @Html.TextBox("SearchString", null, new { @class = "form-control", placeholder = "Enter text to search", style = "flex-grow: 1; margin-right: 10px;" })
+    <button id="searchButton" class="btn btn-primary" style="margin-right: 10px;">Search</button>
+</div>
+<br />
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.studentNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.myLink)
-        </th>
-        <th>
-            Delete
-        </th>
-    </tr>
-
-    @foreach (var item in Model) //For each person
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.studentNumber)
-            </td>
-            <td class="first-name">
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                <a href="@Url.Content(item.myLink)" class="btn btn-primary" target="_blank">LINK</a>
-            </td>
-            <td>
-                <button class="btn btn-primary remove-btn">Delete</button>
-            </td>
-            @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>*@
+            <th>
+                @Html.DisplayNameFor(model => model.studentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                Delete
+            </th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.studentNumber)
+                </td>
+                <td class="first-name">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    <button class="btn btn-primary remove-btn">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+<div style="margin-top: 20px;">
+    <button id="saveDataLocal" class="btn btn-success" style="margin-right: 5px;">Save (Local Object)</button>
+    <button id="loadDataLocal" class="btn btn-info" style="margin-right: 5px;">Load (Local Object)</button>
+    <button id="clearDataLocal" class="btn btn-danger">Clear Local Storage</button>
+</div>
 
 @section Scripts {
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Function to remove a row when "Delete" button is clicked
-            let removeButtons = document.querySelectorAll(".remove-btn");
+            let searchInput = document.getElementById("SearchString");
+            let searchButton = document.getElementById("searchButton");
+            let saveDataLocalButton = document.getElementById("saveDataLocal");
+            let loadDataLocalButton = document.getElementById("loadDataLocal");
+            let clearDataLocalButton = document.getElementById("clearDataLocal");
+            let table = document.querySelector("table");
+            let tableBody = table.querySelector("tbody");
+            let rows = tableBody.querySelectorAll("tr");
 
+            // --- Search Functionality (unchanged) ---
+            searchButton.addEventListener("click", performSearch);
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    performSearch();
+                }
+            });
+
+            function performSearch() {
+                let searchTerm = searchInput.value.trim().toLowerCase();
+                rows.forEach(row => {
+                    let firstNameCell = row.querySelector(".first-name");
+                    if (firstNameCell) {
+                        let firstName = firstNameCell.textContent.trim().toLowerCase();
+                        let cells = row.querySelectorAll("td");
+                        if (searchTerm === "" || firstName.includes(searchTerm)) {
+                            cells.forEach(cell => cell.style.color = "");
+                            if (searchTerm !== "" && firstName.includes(searchTerm)) {
+                                cells.forEach(cell => cell.style.color = "red");
+                                setTimeout(() => {
+                                    cells.forEach(cell => cell.style.color = "");
+                                }, 3000);
+                            }
+                            row.style.display = "";
+                        } else {
+                            row.style.display = "none";
+                        }
+                    } else if (row.querySelector("th") === null) {
+                        row.style.display = "none";
+                    }
+                });
+            }
+
+            // --- Delete Functionality (unchanged) ---
+            let removeButtons = document.querySelectorAll(".remove-btn");
             removeButtons.forEach(button => {
                 button.addEventListener("click", function () {
-                    let row = this.closest("tr"); // Find the closest table row
-                    row.remove();
+                    this.closest("tr").remove();
                 });
             });
 
-            let rows = document.querySelectorAll("table tr");
+            // --- Save to Local Storage (Direct Object Methods) ---
+            saveDataLocalButton.addEventListener("click", function () {
+                localStorage.removeItem("peopleCount"); // Clear previous count
+                tableBody.querySelectorAll("tr").forEach((row, rowIndex) => {
+                    row.querySelectorAll("td").forEach((cell, cellIndex) => {
+                        if (!cell.querySelector("button")) {
+                            localStorage[`person-${rowIndex}-${cellIndex}`] = cell.textContent.trim();
+                        }
+                    });
+                });
+                localStorage.setItem("peopleCount", tableBody.querySelectorAll("tr").length);
+                alert("Table data saved to local storage (Object Methods).");
+            });
 
-            rows.forEach(row => {
-                let firstNameCell = row.querySelector(".first-name"); // Get the first name cell
+            // --- Load from Local Storage (Direct Object Methods) ---
+            loadDataLocalButton.addEventListener("click", function () {
+                const personCount = localStorage.getItem("peopleCount");
+                if (personCount) {
+                    tableBody.innerHTML = ""; // Clear existing table body
+                    for (let i = 0; i < parseInt(personCount); i++) {
+                        let newRow = tableBody.insertRow();
+                        let studentNumber = localStorage.getItem(`person-${i}-0`) || "";
+                        let firstName = localStorage.getItem(`person-${i}-1`) || "";
+                        let lastName = localStorage.getItem(`person-${i}-2`) || "";
+                        let email = localStorage.getItem(`person-${i}-3`) || "";
 
-                if (firstNameCell) {
-                    let name = firstNameCell.textContent.trim();
-                    console.log("Checking name:", name);
+                        let studentNumberCell = newRow.insertCell();
+                        studentNumberCell.textContent = studentNumber;
+                        let firstNameCell = newRow.insertCell();
+                        firstNameCell.textContent = firstName;
+                        firstNameCell.classList.add("first-name");
+                        let lastNameCell = newRow.insertCell();
+                        lastNameCell.textContent = lastName;
+                        let emailCell = newRow.insertCell();
+                        emailCell.textContent = email;
 
-                    if (name.startsWith("S")) {
-                        row.querySelectorAll("td").forEach(cell => {
-                            if (!cell.querySelector("button")) { // Exclude buttons
-                                cell.style.color = "red";
-                            }
+                        let deleteCell = newRow.insertCell();
+                        let deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.classList.add("btn", "btn-primary", "remove-btn");
+                        deleteCell.appendChild(deleteButton);
+                        deleteButton.addEventListener("click", function () {
+                            this.closest("tr").remove();
                         });
-                        console.log("Row text changed to red for:", name);
                     }
+                    rows = tableBody.querySelectorAll("tr");
+                    alert("Table data loaded from local storage (Object Methods).");
+                } else {
+                    alert("No data found in local storage (Object Methods).");
+                }
+            });
+
+            // --- Clear Local Storage ---
+            clearDataLocalButton.addEventListener("click", function () {
+                const personCount = localStorage.getItem("peopleCount");
+                if (personCount) {
+                    for (let i = 0; i < parseInt(personCount); i++) {
+                        localStorage.removeItem(`person-${i}-0`);
+                        localStorage.removeItem(`person-${i}-1`);
+                        localStorage.removeItem(`person-${i}-2`);
+                        localStorage.removeItem(`person-${i}-3`);
+                    }
+                    localStorage.removeItem("peopleCount");
+                    alert("Local storage cleared (Object Methods).");
+                } else {
+                    alert("No data to clear from local storage (Object Methods).");
                 }
             });
         });
     </script>
 }
-
-

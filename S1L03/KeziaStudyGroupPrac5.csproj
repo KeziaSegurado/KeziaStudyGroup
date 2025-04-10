@@ -185,6 +185,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\People\ListPeople.cshtml" />
     <Content Include="Views\Home\Notes.cshtml" />
+    <Content Include="Views\People\PeopleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

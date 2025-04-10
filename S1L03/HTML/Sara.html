@@ -2,60 +2,166 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Person 01</title>
+    <title>Person 03 - Sara Smith</title>
     <link rel="stylesheet" href="/Content\NewStyles.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #d4edda;
+        }
+
+        h1 {
+            color: #155724;
+        }
+
+        nav {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+            nav a {
+                text-decoration: none;
+                color: #007bff;
+                margin-right: 15px;
+            }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .tab-buttons-container {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tab-buttons {
+            display: flex;
+        }
+
+            .tab-buttons button {
+                padding: 10px 15px;
+                margin-right: 5px;
+                cursor: pointer;
+                border: none;
+                background-color: #f8f9fa;
+                border-bottom: 2px solid transparent;
+            }
+
+                .tab-buttons button.active {
+                    background-color: #ddd;
+                    border-bottom: 2px solid #28a745;
+                    font-weight: bold;
+                }
+
+        .tab-content {
+            display: none;
+            padding-top: 15px;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+
+        .bio-content, .hobbies-content {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+            gap: 15px; /* Space between image and text */
+        }
+
+        .left-img, .right-img {
+            max-width: 150px;
+            height: auto;
+        }
+
+       
+    </style>
 </head>
 <body>
     <h1>Person 03 - Sara Smith</h1>
     <nav>
-        <ul>
-            <li><a href="/Home/">MAIN</a></li>
-            <li><a href="/People/ListPeople">LIST</a></li>
-            <li><a href="Kezia.html">Person 01</a></li>
-            <li><a href="John.html">Person 02</a></li>
-            <li><a href="Sara.html" class="active">Person 03</a></li>
-            <li><a href="Bianca.html">Person 04</a></li>
-            <li><a href="Rachel.html">Person 05</a></li>
-            <li><a href="javascript:history.back()">BACK</a></li>
-        </ul>
+        <a href="/Home/">MAIN</a>
     </nav>
-    <section class="bio">
-        <h2>Biography and Background</h2>
-        <img src="Images/Sara.jpeg" alt="Sara Smith" class="left-img">
-        <p>
-            Sara Smith is a passionate musician and aspiring engineer from the vibrant city of Rio de Janeiro. She enjoys exploring various genres of music and playing the piano. Her dream is to blend music with technology in innovative ways.
-        </p>
-    </section>
+    <h2>More information on this person</h2>
+    <div class="container">
+        <div class="tab-buttons-container">
+            <div class="tab-buttons">
+                <button data-target="bio" class="active">Background and biography</button>
+                <button data-target="hobbies">Hobbies</button>
+                <button data-target="modules">Modules</button>
+            </div>
+        </div>
 
-    <section class="hobbies">
-        <h2>Hobbies</h2>
-        <p>
-            Sara's hobbies include playing the piano, hiking in the mountains, and learning about new technologies in the field of AI. She finds peace in nature and has a deep connection to the world of classical music.
-        </p>
-        <img src="Images/Hiking.jpg" alt="Hobbies Image" class="right-img">
-    </section>
+        <section id="bio" class="bio tab-content active">
+            <div class="bio-content">
+                <img src="Images/Sara.jpeg" alt="Sara Smith" class="left-img">
+                <p>
+                    Sara Smith is a passionate musician and aspiring engineer from the vibrant city of Rio de Janeiro. She enjoys exploring various genres of music and playing the piano. Her dream is to blend music with technology in innovative ways.
+                </p>
+            </div>
+        </section>
 
-    <section class="modules">
-        <h2>Registered Modules</h2>
-        <table>
-            <tr>
+        <section id="hobbies" class="hobbies tab-content">
+            <div class="hobbies-content">
+                <p>
+                    Sara's hobbies include playing the piano, hiking in the mountains, and learning about new technologies in the field of AI. She finds peace in nature and has a deep connection to the world of classical music.
+                </p>
+                <img src="Images/Hiking.jpg" alt="Hobbies Image" class="right-img">
+            </div>
+        </section>
 
-                <th>Modules Semester 1</th>
-                <th>Modules Semester 2</th>
-            </tr>
-            <tr>
-                <td>GHO 247</td>
-                <td>MAM 202</td>
-            </tr>
-            <tr>
-                <td>MTI 275</td>
-                <td>MME 258</td>
-            </tr>
-            <tr>
-                <td>MEI 236</td>
-                <td>MTI 267</td>
-            </tr>
-        </table>
-    </section>
+        <section id="modules" class="modules tab-content">
+            
+            <table>
+                <tr>
+                    <th>Modules Semester 1</th>
+                    <th>Modules Semester 2</th>
+                </tr>
+                <tr>
+                    <td>GHO 247</td>
+                    <td>MAM 202</td>
+                </tr>
+                <tr>
+                    <td>MTI 275</td>
+                    <td>MME 258</td>
+                </tr>
+                <tr>
+                    <td>MEI 236</td>
+                    <td>MTI 267</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabButtonsContainer = document.querySelector('.tab-buttons-container');
+            const tabButtons = document.querySelector('.tab-buttons');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtonsContainer.addEventListener('click', function (event) {
+                if (event.target.tagName === 'BUTTON') {
+                    const targetId = event.target.dataset.target;
+
+                    tabButtons.querySelectorAll('button').forEach(button => {
+                        button.classList.remove('active');
+                    });
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+
+                    event.target.classList.add('active');
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

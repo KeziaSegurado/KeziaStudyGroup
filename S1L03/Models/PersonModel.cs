@@ -22,8 +22,5 @@ namespace S1L03.Models
         public string email { get; set; }
 
 
-        [Display(Name = "Link to personal page")] //Add as decorator
-        public string myLink { get; set; }
-
     }
 }
